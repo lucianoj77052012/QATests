@@ -7,7 +7,16 @@
 # sys.path.append(root_path)
 
 import pytest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+
+DRIVER_PATH = "/usr/src/app/chromedriver"
 
 @pytest.fixture
-def some_value():
-    return 8
+def browser():
+    options = Options()
+    options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    service = Service(DRIVER_PATH)
+    browser = webdriver.Chrome(service=service, options=options)
