@@ -9,4 +9,6 @@ Install Docker at https://docs.docker.com/desktop/setup/install/windows-install/
 
 And:
 
-`docker run qatests`
+`docker run -v ./reports:/usr/src/app/reports qatests`
+
+The -v option makes it such that the screenshots taken (reports) are saved into the host machine.

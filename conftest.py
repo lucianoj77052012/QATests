@@ -6,12 +6,16 @@
 # root_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # sys.path.append(root_path)
 
+import os
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
-DRIVER_PATH = "/usr/src/app/chromedriver"
+USERNAME = "Luciano"
+DRIVER_PATH = os.path.join(".", "chromedriver")
+SCREENSHOTS_PATH = os.path.join(".", "reports")
 
 @pytest.fixture
 def browser():
@@ -20,3 +24,5 @@ def browser():
     options.add_argument("--no-sandbox")
     service = Service(DRIVER_PATH)
     browser = webdriver.Chrome(service=service, options=options)
+    browser.get(f"https://www.qacloud.dev/app-login.html?user={USERNAME}&app=hotel")
+    browser.save_screenshot(os.path.join(SCREENSHOTS_PATH, "login.png"))
