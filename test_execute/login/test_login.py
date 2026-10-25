@@ -1,7 +1,3 @@
-@scenario("login.feature", "Create an account")
+#@scenario("login.feature", "Create an account")
 def test_login():
-    pass
-
-@scenario("login.feature", "Create an account")
-def test_login():
-    pass
+    assert 1 == 3
