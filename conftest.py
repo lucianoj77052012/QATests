@@ -13,9 +13,12 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
-USERNAME = "Luciano"
 DRIVER_PATH = os.path.join(".", "chromedriver")
-SCREENSHOTS_PATH = os.path.join(".", "reports")
+
+@pytest.fixture
+def constants():
+    pytest.USERNAME = "Luciano"
+    pytest.SCREENSHOTS_PATH = os.path.join(".", "reports")
 
 @pytest.fixture
 def browser():
@@ -24,5 +27,4 @@ def browser():
     options.add_argument("--no-sandbox")
     service = Service(DRIVER_PATH)
     browser = webdriver.Chrome(service=service, options=options)
-    browser.get(f"https://www.qacloud.dev/app-login.html?user={USERNAME}&app=hotel")
-    browser.save_screenshot(os.path.join(SCREENSHOTS_PATH, "login.png"))
+    return browser
