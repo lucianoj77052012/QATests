@@ -13,3 +13,4 @@ pip-log.txt
 *.log
 .DS_Store
 reports/
+api_keys.txt

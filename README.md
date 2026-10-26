@@ -3,6 +3,8 @@ A collection of tests aimed at ensuring automation practice sites work as expect
 
 # HOW TO BUILD
 
+You will need api_keys.txt with the corresponding keys.
+
 Install Docker at https://docs.docker.com/desktop/setup/install/windows-install/ (for Windows). Make sure the daemon is running (opening Docker Desktop runs it). Then run:
 
 `docker build -t qatests .`
