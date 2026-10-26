@@ -3,3 +3,4 @@ Feature: Hotel
 
 Scenario: Login to hotel app
     Given I navigated to hotel app link
+    When I enter my credentials

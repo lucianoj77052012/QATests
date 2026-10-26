@@ -27,4 +27,5 @@ def browser():
     options.add_argument("--no-sandbox")
     service = Service(DRIVER_PATH)
     browser = webdriver.Chrome(service=service, options=options)
+    browser.implicitly_wait(2)
     return browser
