@@ -3,7 +3,7 @@ A collection of tests aimed at ensuring automation practice sites work as expect
 
 # HOW TO BUILD
 
-Install Docker at https://docs.docker.com/desktop/setup/install/windows-install/ (for Windows). Then run:
+Install Docker at https://docs.docker.com/desktop/setup/install/windows-install/ (for Windows). Make sure the daemon is running (opening Docker Desktop runs it). Then run:
 
 `docker build -t qatests .`
 
