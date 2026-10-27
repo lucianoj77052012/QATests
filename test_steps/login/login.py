@@ -1,10 +1,10 @@
 import pytest
 import os
-import time
 from pytest_bdd import given, when, then, parsers
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 
-from test_steps.frontend.locators import Login
+from test_steps.frontend.locators import Login, Properties
 
 API_KEYS_FILENAME = "api_keys.txt"
 USER_DATA_FILENAME = os.path.join("test_data", "user_data.csv")
@@ -34,7 +34,13 @@ def enter_credentials(browser, user_session):
     username_input.send_keys(get_api_key(user_session.user))
     login_button = browser.find_element(By.XPATH, Login.login_button)
     login_button.click()
-    time.sleep(5)
+
+@then("I verify the currently active tab is Properties")
+def verify_currently_active_tab_properties(browser):
+    try:
+        browser.find_element(By.XPATH, Properties.add_property)
+    except NoSuchElementException:
+        pytest.fail("Add property button not found. Login failed.")
 
 def get_api_key(user):
     if not os.path.exists(API_KEYS_FILENAME):

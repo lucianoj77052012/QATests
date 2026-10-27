@@ -9,7 +9,7 @@ class Bookings:
     pass
 
 class Properties:
-    pass
+    add_property = "//button[text()='Add Property']"
 
 class Something:
     pass
