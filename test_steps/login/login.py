@@ -5,7 +5,6 @@ from pytest_bdd import given, when, then, parsers
 from selenium.webdriver.common.by import By
 
 from test_steps.frontend.locators import Login
-from test_steps.frontend.reports import take_full_page_screenshot
 
 API_KEYS_FILENAME = "api_keys.txt"
 USER_DATA_FILENAME = os.path.join("test_data", "user_data.csv")
@@ -36,7 +35,6 @@ def enter_credentials(browser, user_session):
     login_button = browser.find_element(By.XPATH, Login.login_button)
     login_button.click()
     time.sleep(5)
-    take_full_page_screenshot(browser)
 
 def get_api_key(user):
     if not os.path.exists(API_KEYS_FILENAME):

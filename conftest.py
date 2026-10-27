@@ -13,6 +13,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
+from test_steps.frontend.reports import take_full_page_screenshot
+
 DRIVER_PATH = os.path.join(".", "chromedriver")
 
 @pytest.fixture
@@ -24,3 +26,8 @@ def browser():
     browser = webdriver.Chrome(service=service, options=options)
     browser.implicitly_wait(2)
     return browser
+
+@pytest.fixture
+def take_full_page_screenshot_wrapper(browser):
+    yield #Wait until the test is done, then execute below code (take screenshot of final result, either success or fail).
+    take_full_page_screenshot(browser)
