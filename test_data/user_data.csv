@@ -1,4 +1,4 @@
 SEP=,
-user,password,api_key
-6Properties,6PropertiesPassword,6PropertiesApiKey
-BookingFullFlow,BookingFullFlowPassword,BookingFullFlowApiKey
+user,api_key
+6Properties,6PropertiesApiKey
+BookingFullFlow,BookingFullFlowApiKey
