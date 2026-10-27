@@ -1,4 +1,4 @@
 SEP=,
-user,api_key
-6Properties,6PropertiesApiKey
-BookingFullFlow,BookingFullFlowApiKey
+tester_purpose,user,api_key_name
+6Properties,Luciano,6PropertiesApiKey
+BookingFullFlow,Luciano_,BookingFullFlowApiKey

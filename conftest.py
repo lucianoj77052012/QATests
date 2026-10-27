@@ -16,11 +16,6 @@ from selenium.webdriver.chrome.options import Options
 DRIVER_PATH = os.path.join(".", "chromedriver")
 
 @pytest.fixture
-def constants():
-    pytest.USERNAME = "Luciano"
-    pytest.SCREENSHOTS_PATH = os.path.join(".", "reports")
-
-@pytest.fixture
 def browser():
     options = Options()
     options.add_argument("--headless=new")
