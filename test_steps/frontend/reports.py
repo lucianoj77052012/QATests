@@ -4,8 +4,9 @@ from selenium.webdriver.common.by import By
 
 SCREENSHOTS_PATH = os.path.join(".", "reports")
 
-def take_full_page_screenshot(browser):
+def take_full_page_screenshot(browser, request):
     required_width = browser.execute_script('return document.body.parentNode.scrollWidth')
     required_height = browser.execute_script('return document.body.parentNode.scrollHeight')
     browser.set_window_size(required_width, required_height)
-    browser.find_element(By.TAG_NAME, 'body').screenshot(os.path.join(SCREENSHOTS_PATH, "login.png"))
+    test_name = request.node.nodeid.split("::test_")[-1].split(".py")[0]
+    browser.find_element(By.TAG_NAME, 'body').screenshot(os.path.join(SCREENSHOTS_PATH, f"{test_name}.png"))

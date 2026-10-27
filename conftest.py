@@ -28,6 +28,6 @@ def browser():
     return browser
 
 @pytest.fixture
-def take_full_page_screenshot_wrapper(browser):
+def take_full_page_screenshot_wrapper(browser, request):
     yield #Wait until the test is done, then execute below code (take screenshot of final result, either success or fail).
-    take_full_page_screenshot(browser)
+    take_full_page_screenshot(browser, request)
