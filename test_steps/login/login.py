@@ -5,7 +5,7 @@ from pytest_bdd import given, when, then
 from selenium.webdriver.common.by import By
 
 from test_steps.frontend.locators import Login
-from test_steps.frontend.reports import take_screenshot
+from test_steps.frontend.reports import take_full_page_screenshot
 
 @given("I navigated to hotel app link")
 def login(browser, constants):
@@ -19,7 +19,7 @@ def enter_credentials(browser, constants):
     login_button = browser.find_element(By.XPATH, Login.login_button)
     login_button.click()
     time.sleep(5)
-    take_screenshot(browser, constants)
+    take_full_page_screenshot(browser, constants)
 
 def get_api_key():
     with open("api_keys.txt") as api_keys_file:
