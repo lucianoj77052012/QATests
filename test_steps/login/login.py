@@ -28,6 +28,11 @@ def navigate_hotel_app_link(browser, tester_purpose):
     browser.get(f"https://www.qacloud.dev/app-login.html?user={user}&app=hotel")
     return UserSession(tester_purpose, user, api_key_name)
 
+@given(parsers.parse("I logged in as {tester_purpose}"))
+def login(browser, tester_purpose):
+    user_session = navigate_hotel_app_link(browser, tester_purpose)
+    enter_credentials(browser, user_session)
+
 @when("I enter my credentials")
 def enter_credentials(browser, user_session):
     username_input = browser.find_element(By.XPATH, Login.password)
