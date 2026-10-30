@@ -23,9 +23,9 @@ class UserSession:
         self.api_key_name = api_key_name
 
 @given(parsers.parse("I navigated to hotel app link as {tester_purpose}"), target_fixture="user_session")
-def navigate_hotel_app_link(page, tester_purpose):
+def navigate_hotel_app_link(frontend, tester_purpose):
     tester_purpose, user, api_key_name = get_user_data(tester_purpose)
-    page.goto(f"https://www.qacloud.dev/app-login.html?user={user}&app=hotel")
+    frontend.navigate_to_url(f"https://www.qacloud.dev/app-login.html?user={user}&app=hotel")
     return UserSession(tester_purpose, user, api_key_name)
 
 @given(parsers.parse("I logged in as {tester_purpose}"))

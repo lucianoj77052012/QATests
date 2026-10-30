@@ -6,6 +6,8 @@
 # root_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # sys.path.append(root_path)
 
+from abc import ABC, abstractmethod
+
 import os
 
 import pytest
@@ -19,6 +21,30 @@ from test_steps.frontend.reports import take_full_page_screenshot
 from test_steps.frontend.reports import take_full_page_screenshot_playwright
 
 DRIVER_PATH = os.path.join(".", "chromedriver")
+
+class AbstractFrontend(ABC):
+
+    @abstractmethod
+    def navigate_to_url(self, url):
+        pass
+
+class SeleniumBrowser(AbstractFrontend):
+    pass
+
+class PlaywrightPage(AbstractFrontend):
+    
+    def __init__(self, page):
+        self.page = page
+
+    def navigate_to_url(self, url):
+        self.page.goto(url)
+
+@pytest.fixture
+def frontend():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        yield PlaywrightPage(page)
 
 @pytest.fixture
 def browser():
