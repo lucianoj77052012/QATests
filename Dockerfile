@@ -24,7 +24,7 @@ RUN pip install -r requirements.txt -r requirements_${arg_automation_framework}.
 
 RUN mkdir -p ./reports
 
-RUN playwright install
+RUN if [ "$arg_automation_framework" = "playwright" ] ; then playwright install ; fi
 
 COPY . .
 
