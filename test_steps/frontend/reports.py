@@ -1,6 +1,6 @@
 import pytest
 import os
-from selenium.webdriver.common.by import By
+# from selenium.webdriver.common.by import By
 
 SCREENSHOTS_PATH = os.path.join(".", "reports")
 

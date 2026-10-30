@@ -1,8 +1,8 @@
 import pytest
 import os
 from pytest_bdd import given, when, then, parsers
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+#from selenium.webdriver.common.by import By
+#from selenium.common.exceptions import NoSuchElementException
 
 from test_steps.frontend.locators import Login, Properties
 
@@ -26,7 +26,6 @@ class UserSession:
 def navigate_hotel_app_link(page, tester_purpose):
     tester_purpose, user, api_key_name = get_user_data(tester_purpose)
     page.goto(f"https://www.qacloud.dev/app-login.html?user={user}&app=hotel")
-    page.screenshot(path="reports/example.png")
     return UserSession(tester_purpose, user, api_key_name)
 
 @given(parsers.parse("I logged in as {tester_purpose}"))
@@ -34,11 +33,18 @@ def login(browser, tester_purpose):
     user_session = navigate_hotel_app_link(browser, tester_purpose)
     enter_credentials(browser, user_session)
 
+# @when("I enter my credentials")
+# def enter_credentials(browser, user_session):
+#     username_input = browser.find_element(By.XPATH, Login.password)
+#     username_input.send_keys(get_api_key(user_session.user))
+#     login_button = browser.find_element(By.XPATH, Login.login_button)
+#     login_button.click()
+
 @when("I enter my credentials")
-def enter_credentials(browser, user_session):
-    username_input = browser.find_element(By.XPATH, Login.password)
-    username_input.send_keys(get_api_key(user_session.user))
-    login_button = browser.find_element(By.XPATH, Login.login_button)
+def enter_credentials(page, user_session):
+    username_input = page.fill(f"xpath={Login.password}", get_api_key(user_session.user))
+    #username_input.send_keys(get_api_key(user_session.user))
+    login_button = page.locator(f"xpath={Login.login_button}")
     login_button.click()
 
 @then("I verify the currently active tab is Properties")
