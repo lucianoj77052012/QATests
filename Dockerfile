@@ -15,12 +15,16 @@ RUN wget https://storage.googleapis.com/chrome-for-testing-public/$CHROME_VERSIO
   && mv ./chromedriver-linux64/chromedriver ./chromedriver \
   && chmod +x ./chromedriver
 
-COPY requirements.txt .
 
-# Make sure this runs first, since it's less frequently updated. Makes use of Docker cache for faster builds (literally 1 second vs 20+ seconds).
-RUN pip install -r requirements.txt
+# Make sure pip runs first, since it's less frequently updated. Makes use of Docker cache for faster builds (literally 1 second vs 20+ seconds).
+COPY requirements.txt .
+ARG arg_automation_framework
+COPY requirements_${arg_automation_framework}.txt .
+RUN pip install -r requirements.txt -r requirements_${arg_automation_framework}.txt
 
 RUN mkdir -p ./reports
+
+RUN playwright install
 
 COPY . .
 
