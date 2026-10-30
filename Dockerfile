@@ -24,4 +24,4 @@ RUN mkdir -p ./reports
 
 COPY . .
 
-CMD ["pytest", "-s"]
+ENTRYPOINT ["pytest"]

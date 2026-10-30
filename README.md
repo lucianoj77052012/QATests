@@ -15,6 +15,8 @@ And:
 
 The -v option makes it such that the screenshots taken (reports) are saved into the host machine.
 
+If you want to run a specific test, you can add its full path after `qatests`. An alternative is to use testpaths/addopts in pytest.ini, but I feel using the docker run command is more appropriate because it isn't source-controlled, so tests can be run on-demand without changing the output of git status. For CI/CD pipelines however, I plan on adding markers.
+
 # ABOUT THE HOTEL APP
 
 It's an app where you can book your stays in a room within a property.
