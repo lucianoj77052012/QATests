@@ -4,4 +4,4 @@ Feature: Properties
 Scenario: Add New Property form renders all required fields
     Given I logged in as 6Properties
     When I navigate to the Properties tab
-    #Then I verify Star Rating shows "Select" placeholder
+    Then I verify Star Rating shows Select placeholder

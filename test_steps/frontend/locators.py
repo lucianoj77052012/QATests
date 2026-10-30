@@ -12,6 +12,7 @@ class Bookings:
     pass
 
 class Properties:
+    star_rating_dropdown = "//select[@id='propStarRating']"
     add_property = "//button[text()='Add Property']"
 
 class Something:
