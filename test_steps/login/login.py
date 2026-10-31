@@ -33,19 +33,13 @@ def login(browser, tester_purpose):
     user_session = navigate_hotel_app_link(browser, tester_purpose)
     enter_credentials(browser, user_session)
 
-# @when("I enter my credentials")
-# def enter_credentials(browser, user_session):
-#     username_input = browser.find_element(By.XPATH, Login.password)
-#     username_input.send_keys(get_api_key(user_session.user))
-#     login_button = browser.find_element(By.XPATH, Login.login_button)
-#     login_button.click()
-
 @when("I enter my credentials")
-def enter_credentials(page, user_session):
-    username_input = page.fill(f"xpath={Login.password}", get_api_key(user_session.user))
+def enter_credentials(frontend, user_session):
+    frontend.type_in_element(Login.password, get_api_key(user_session.user))
+    #username_input = page.fill(f"xpath={Login.password}", get_api_key(user_session.user))
     #username_input.send_keys(get_api_key(user_session.user))
-    login_button = page.locator(f"xpath={Login.login_button}")
-    login_button.click()
+    #login_button = page.locator(f"xpath={Login.login_button}")
+    #login_button.click()
 
 @then("I verify the currently active tab is Properties")
 def verify_currently_active_tab_properties(browser):

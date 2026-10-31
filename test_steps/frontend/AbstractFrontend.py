@@ -5,3 +5,7 @@ class AbstractFrontend(ABC):
     @abstractmethod
     def navigate_to_url(self, url):
         pass
+
+    @abstractmethod
+    def type_in_element(self, element_xpath, text): #Method (CSS, XPATH, etc.) could be sent by param as well, but for now all locators are expected to be in XPATH format.
+        pass
