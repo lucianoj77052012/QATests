@@ -7,7 +7,7 @@ You will need api_keys.txt with the corresponding keys.
 
 Install Docker at https://docs.docker.com/desktop/setup/install/windows-install/ (for Windows). Make sure the daemon is running (opening Docker Desktop runs it). Then run:
 
-`docker build -t qatests .`
+`docker build --build-arg=arg_automation_framework=[selenium | playwright] -t qatests .`
 
 And:
 

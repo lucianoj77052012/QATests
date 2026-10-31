@@ -6,62 +6,44 @@
 # root_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # sys.path.append(root_path)
 
-from abc import ABC, abstractmethod
-
 import os
 
 import pytest
-# from selenium import webdriver
-# from selenium.webdriver.chrome.service import Service
-# from selenium.webdriver.chrome.options import Options
-
-from playwright.sync_api import sync_playwright
 
 from test_steps.frontend.reports import take_full_page_screenshot
 from test_steps.frontend.reports import take_full_page_screenshot_playwright
 
-DRIVER_PATH = os.path.join(".", "chromedriver")
+DRIVER_PATH = os.path.join(".", "chromedriver") #For Selenium solution.
 
-class AbstractFrontend(ABC):
-
-    @abstractmethod
-    def navigate_to_url(self, url):
-        pass
-
-class SeleniumBrowser(AbstractFrontend):
+class InvalidAutomationFrameworkException(Exception):
     pass
-
-class PlaywrightPage(AbstractFrontend):
-    
-    def __init__(self, page):
-        self.page = page
-
-    def navigate_to_url(self, url):
-        self.page.goto(url)
 
 @pytest.fixture
 def frontend():
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
-        yield PlaywrightPage(page)
-
-@pytest.fixture
-def browser():
-    options = Options()
-    options.add_argument("--headless=new")
-    options.add_argument("--no-sandbox")
-    service = Service(DRIVER_PATH)
-    browser = webdriver.Chrome(service=service, options=options)
-    browser.implicitly_wait(2)
-    return browser
-
-@pytest.fixture
-def page():
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
-        yield page
+    automation_framework = os.environ.get("env_automation_framework", None)
+    if automation_framework is None:
+        raise InvalidAutomationFrameworkException(f"Automation framework not set in environment variable.")
+    if automation_framework == "selenium":
+        from selenium import webdriver
+        from selenium.webdriver.chrome.service import Service
+        from selenium.webdriver.chrome.options import Options
+        from test_steps.frontend.SeleniumBrowser import SeleniumBrowser
+        options = Options()
+        options.add_argument("--headless=new")
+        options.add_argument("--no-sandbox")
+        service = Service(DRIVER_PATH)
+        browser = webdriver.Chrome(service=service, options=options)
+        browser.implicitly_wait(2)
+        yield SeleniumBrowser(browser)
+    elif automation_framework == "playwright":
+        from playwright.sync_api import sync_playwright
+        from test_steps.frontend.PlaywrightPage import PlaywrightPage
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
+            yield PlaywrightPage(page)
+    else:
+        raise InvalidAutomationFrameworkException(f"Provided automation framework {automation_framework} is not valid. Valid options: selenium, playwright.")
 
 @pytest.fixture
 def take_full_page_screenshot_wrapper(browser, request):
