@@ -10,9 +10,6 @@ import os
 
 import pytest
 
-from test_steps.frontend.reports import take_full_page_screenshot
-from test_steps.frontend.reports import take_full_page_screenshot_playwright
-
 DRIVER_PATH = os.path.join(".", "chromedriver") #For Selenium solution.
 
 class InvalidAutomationFrameworkException(Exception):
@@ -27,7 +24,7 @@ def frontend():
         from selenium import webdriver
         from selenium.webdriver.chrome.service import Service
         from selenium.webdriver.chrome.options import Options
-        from test_steps.frontend.SeleniumBrowser import SeleniumBrowser
+        from test_steps.frontend.selenium.SeleniumBrowser import SeleniumBrowser
         options = Options()
         options.add_argument("--headless=new")
         options.add_argument("--no-sandbox")
@@ -37,7 +34,7 @@ def frontend():
         yield SeleniumBrowser(browser)
     elif automation_framework == "playwright":
         from playwright.sync_api import sync_playwright
-        from test_steps.frontend.PlaywrightPage import PlaywrightPage
+        from test_steps.frontend.playwright.PlaywrightPage import PlaywrightPage
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
@@ -46,11 +43,6 @@ def frontend():
         raise InvalidAutomationFrameworkException(f"Provided automation framework {automation_framework} is not valid. Valid options: selenium, playwright.")
 
 @pytest.fixture
-def take_full_page_screenshot_wrapper(browser, request):
+def take_full_page_screenshot_wrapper(frontend, request):
     yield #Wait until the test is done, then execute below code (take screenshot of final result, either success or fail).
-    take_full_page_screenshot(browser, request)
-
-@pytest.fixture
-def take_full_page_screenshot_playwright_wrapper(page, request):
-    yield
-    take_full_page_screenshot_playwright(page, request)
+    frontend.take_full_page_screenshot(request)

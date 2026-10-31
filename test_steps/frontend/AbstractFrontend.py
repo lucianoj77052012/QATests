@@ -9,3 +9,7 @@ class AbstractFrontend(ABC):
     @abstractmethod
     def type_in_element(self, element_xpath, text): #Method (CSS, XPATH, etc.) could be sent by param as well, but for now all locators are expected to be in XPATH format.
         pass
+
+    @abstractmethod
+    def take_full_page_screenshot(self, request):
+        pass
