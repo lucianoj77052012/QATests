@@ -15,6 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Create API Keys
-      run: ./.github/workflows/create_api_keys.sh ${{ secrets.API_KEYS }}
+      run: bash ./.github/workflows/create_api_keys.sh ${{ secrets.API_KEYS }}
     - name: Build the Docker image
       run: docker build --build-arg=arg_automation_framework=${{ secrets.AUTOMATION_FRAMEWORK_DUMMY }} -t qatests . && docker run -v ./reports/playwright:/usr/src/app/reports/playwright qatests -s test_execute/login/test_login.py
