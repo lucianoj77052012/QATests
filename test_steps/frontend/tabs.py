@@ -4,6 +4,5 @@ from selenium.webdriver.common.by import By
 from test_steps.frontend.locators import Tabs
 
 @when(parsers.parse("I navigate to the {tab} tab"))
-def navigate_tab(browser, tab):
-    tab_element = browser.find_element(By.XPATH, Tabs.tab.format(tab))
-    tab_element.click()
+def navigate_tab(frontend, tab):
+    frontend.click_button(Tabs.tab.format(tab))

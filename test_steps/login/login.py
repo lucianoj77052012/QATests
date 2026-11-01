@@ -29,9 +29,9 @@ def navigate_hotel_app_link(frontend, tester_purpose):
     return UserSession(tester_purpose, user, api_key_name)
 
 @given(parsers.parse("I logged in as {tester_purpose}"))
-def login(browser, tester_purpose):
-    user_session = navigate_hotel_app_link(browser, tester_purpose)
-    enter_credentials(browser, user_session)
+def login(frontend, tester_purpose):
+    user_session = navigate_hotel_app_link(frontend, tester_purpose)
+    enter_credentials(frontend, user_session)
 
 @when("I enter my credentials")
 def enter_credentials(frontend, user_session):
