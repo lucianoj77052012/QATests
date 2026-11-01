@@ -16,3 +16,6 @@ class SeleniumBrowser(AbstractFrontend):
 
     def take_full_page_screenshot(self, request):
         self.reports.take_full_page_screenshot(request)
+
+    def click_button(self, button_xpath):
+        self.browser.find_element(By.XPATH, button_xpath).click()

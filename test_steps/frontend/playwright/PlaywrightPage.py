@@ -15,3 +15,6 @@ class PlaywrightPage(AbstractFrontend):
 
     def take_full_page_screenshot(self, request):
         self.reports.take_full_page_screenshot(request)
+
+    def click_button(self, button_xpath):
+        self.page.locator(f"xpath={button_xpath}").click()

@@ -13,3 +13,7 @@ class AbstractFrontend(ABC):
     @abstractmethod
     def take_full_page_screenshot(self, request):
         pass
+
+    @abstractmethod
+    def click_button(self, button_xpath):
+        pass
