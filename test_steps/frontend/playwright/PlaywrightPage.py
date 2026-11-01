@@ -18,3 +18,6 @@ class PlaywrightPage(AbstractFrontend):
 
     def click_button(self, button_xpath):
         self.page.locator(f"xpath={button_xpath}").click()
+
+    def verify_element_exists(self, element_xpath):
+        return self.page.query_selector(f"xpath={element_xpath}") is not None

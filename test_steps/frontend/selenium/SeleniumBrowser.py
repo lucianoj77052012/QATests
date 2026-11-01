@@ -19,3 +19,10 @@ class SeleniumBrowser(AbstractFrontend):
 
     def click_button(self, button_xpath):
         self.browser.find_element(By.XPATH, button_xpath).click()
+
+    def verify_element_exists(self, element_xpath):
+        try:
+            self.browser.find_element(By.XPATH, element_xpath)
+            return True
+        except NoSuchElementException:
+            return False

@@ -39,10 +39,8 @@ def enter_credentials(frontend, user_session):
     frontend.click_button(Login.login_button)
 
 @then("I verify the currently active tab is Properties")
-def verify_currently_active_tab_properties(browser):
-    try:
-        browser.find_element(By.XPATH, Properties.add_property)
-    except NoSuchElementException:
+def verify_currently_active_tab_properties(frontend):
+    if not frontend.verify_element_exists(Properties.add_property):
         pytest.fail("Add property button not found. Login failed.")
 
 def get_api_key(user):

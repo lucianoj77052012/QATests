@@ -17,3 +17,7 @@ class AbstractFrontend(ABC):
     @abstractmethod
     def click_button(self, button_xpath):
         pass
+
+    @abstractmethod
+    def verify_element_exists(self, element_xpath):
+        pass
