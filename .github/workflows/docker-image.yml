@@ -17,9 +17,9 @@ jobs:
     - name: Create API Keys
       run: bash ./.github/workflows/create_api_keys.sh ${{ secrets.API_KEYS }}
     - name: Build the Docker image
-      run: docker build --build-arg=arg_automation_framework=playwright -t qatests . && docker run -v ./reports/playwright:/usr/src/app/reports/playwright qatests -s test_execute/login/test_login.py
+      run: docker build --build-arg=arg_automation_framework=selenium -t qatests . && docker run -v ./reports/selenium:/usr/src/app/reports/selenium qatests -s test_execute/login/test_login.py
     - name: Archive test output screenshot report
       uses: actions/upload-artifact@v4
       with:
         name: test-output-screenshot-report
-        path: reports/*.png
+        path: reports/selenium/*.png
