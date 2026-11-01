@@ -1,6 +1,7 @@
 from test_steps.frontend.AbstractFrontend import AbstractFrontend
 from test_steps.frontend.selenium.SeleniumReports import SeleniumReports
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
 class SeleniumBrowser(AbstractFrontend):
     
@@ -26,3 +27,7 @@ class SeleniumBrowser(AbstractFrontend):
             return True
         except NoSuchElementException:
             return False
+
+    def get_dropdown_selected_value(self, dropdown_xpath):
+        star_rating_dropdown = Select(self.browser.find_element(By.XPATH, dropdown_xpath))
+        return star_rating_dropdown.all_selected_options[0].text #It's a one-element dropdown.

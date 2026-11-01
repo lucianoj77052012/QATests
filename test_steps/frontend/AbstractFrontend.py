@@ -21,3 +21,7 @@ class AbstractFrontend(ABC):
     @abstractmethod
     def verify_element_exists(self, element_xpath):
         pass
+
+    @abstractmethod
+    def get_dropdown_selected_value(self, dropdown_xpath):
+        pass
